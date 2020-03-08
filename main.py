@@ -15,25 +15,22 @@ class Thread(QThread):
         signal = pyqtSignal(object)
         self.f=f
         self.fn=fn
-            #print(var)
+
     # run method gets called when we start the thread
 
-        self.threadactive = True
-
-    @pyqtSlot()
     def run(self):
         print("starting thread")
         if self.f:
             result = self.fn(w).CheckArea()
         else:
             result = self.fn()
+        
+
         #w.gui.catched_edit.setText(str(process.fish_count))
         #w.gui.status_edit.setText(str(process.status))
-
-    def stop(self,fish=False):
-        print("fishing stopped")
-        self.exit()
-        
+    def stop(self):
+        print("thread ended")
+        self.terminate()
         
 
 class Timer:
@@ -67,24 +64,23 @@ class AppWindow(QMainWindow):
         super(AppWindow, self).__init__()
         self.gui = gui.Ui_Window()
         self.gui.setupUi(self)
-        self.fish=True
         self.fish_thread = Thread(imagesearch.Fishit, f=True)
         self.gui.fish_button.clicked.connect(self.FishButton)
         #self.fish_thread.signal.connect(self.gui.status_label.setText)
         #self.fish_thread.signal.connect(self.finished)
         self.gui.stop_button.clicked.connect(self.Stop)
-        
+
     def FishButton(self):
         duration = int(self.gui.duration.currentText())
         self.gui.fish_button.setEnabled(False)
+        self.gui.stoppedLabel.setText("")
         self.fish_thread.start()
         self.timer = Thread(Timer(duration).timer)
         self.timer.start()
-    
+
     def Stop(self):
         self.gui.fish_button.setEnabled(True)
-        self.fish=False
-        self.fish_thread.stop()
+        self.gui.stoppedLabel.setText("Stopped")
         self.timer.stop()
         self.gui.time_edit.setText("0:0:0")
         self.gui.catched_edit.setText("")

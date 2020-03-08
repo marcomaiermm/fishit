@@ -13,8 +13,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Window(object):
     def setupUi(self, Window):
         Window.setObjectName("Window")
-        #Window.resize(338, 85)
-        Window.setFixedSize(338, 85)
+        Window.resize(338, 85)
         Window.setContextMenuPolicy(QtCore.Qt.NoContextMenu)
         Window.setAcceptDrops(False)
         self.fish_button = QtWidgets.QPushButton(Window)
@@ -57,7 +56,10 @@ class Ui_Window(object):
         self.duration.addItem("")
         self.duration.addItem("")
         self.duration.addItem("")
-
+        self.stoppedLabel = QtWidgets.QLabel(Window)
+        self.stoppedLabel.setGeometry(QtCore.QRect(280, 60, 47, 13))
+        self.stoppedLabel.setText("")
+        self.stoppedLabel.setObjectName("stoppedLabel")
         self.retranslateUi(Window)
         QtCore.QMetaObject.connectSlotsByName(Window)
 
