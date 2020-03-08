@@ -14,6 +14,7 @@ class Fishit(QWidget):
     def __init__(self,w):
         super().__init__()
         self.widget = w
+        self.fish=w.fish
     def CheckArea(self):
         self.status="idle..."
         self.fish_count=0
@@ -22,7 +23,7 @@ class Fishit(QWidget):
         last_x = 0
         last_y = 0
         status=['fishing...','catch!','looting']
-        while True:
+        while self.fish:
             try:
                 dM01, dM10, dArea, fish_area = CatchArea()
                 if self.active_window_process_name()=="WowClassic.exe":
