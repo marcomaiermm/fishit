@@ -1,0 +1,1 @@
+from .fish_logic import Fishit
