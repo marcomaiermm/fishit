@@ -73,7 +73,6 @@ class AppWindow(QMainWindow):
 
     def FishButton(self):
         duration = int(self.gui.duration.currentText())
-        duration = 1
         self.gui.fish_button.setEnabled(False)
         self.gui.stoppedLabel.setText("")
         self.fish_thread.start()
