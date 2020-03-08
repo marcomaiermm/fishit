@@ -43,7 +43,7 @@ class Timer:
         self.total=0
 
     def timer(self):
-        while self.total<=(self.dur*60):
+        while self.total<=(self.dur*60) and w.gui.stoppedLabel.text()=="":
             if self.elapsed_m<=59:
                 if self.elapsed_s<=59:
                     self.elapsed_s+=1
@@ -57,7 +57,8 @@ class Timer:
             w.gui.time_edit.setText(time_text)
             self.total+=1
             time.sleep(1)
-        w.Stop()
+        w.gui.stoppedLabel.setText("Stopped")
+        w.Clear()
 
 class AppWindow(QMainWindow):
     def __init__(self):
@@ -72,6 +73,7 @@ class AppWindow(QMainWindow):
 
     def FishButton(self):
         duration = int(self.gui.duration.currentText())
+        duration = 1
         self.gui.fish_button.setEnabled(False)
         self.gui.stoppedLabel.setText("")
         self.fish_thread.start()
@@ -79,13 +81,16 @@ class AppWindow(QMainWindow):
         self.timer.start()
 
     def Stop(self):
-        self.gui.fish_button.setEnabled(True)
         self.gui.stoppedLabel.setText("Stopped")
         self.timer.stop()
+        self.Clear()
+        self.time=0
+
+    def Clear(self):
         self.gui.time_edit.setText("0:0:0")
         self.gui.catched_edit.setText("")
         self.gui.status_edit.setText("")
-        self.time=0
+        self.gui.fish_button.setEnabled(True)
 
 if __name__ == "__main__":
     app=QApplication(sys.argv)
