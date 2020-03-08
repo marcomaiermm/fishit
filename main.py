@@ -49,7 +49,6 @@ class Timer:
                 else:
                     self.elapsed_s=0
                     self.elapsed_m+=1
-                    w.time+=1
             else:
                 self.elapsed_h+=1
                 self.elapsed_m=0
