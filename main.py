@@ -43,7 +43,7 @@ class Timer:
         self.total=0
 
     def timer(self):
-        while self.total<=(self.dur*60) and w.gui.stoppedLabel.text()=="":
+        while (self.total<=(self.dur*60)) and (w.gui.stoppedLabel.text()==""):
             if self.elapsed_m<=59:
                 if self.elapsed_s<=59:
                     self.elapsed_s+=1
