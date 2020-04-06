@@ -15,7 +15,6 @@ class Thread(QThread):
         signal = pyqtSignal(object)
         self.f=f
         self.fn=fn
-
     # run method gets called when we start the thread
 
     def run(self):

@@ -1,12 +1,11 @@
 import cv2
 import numpy as np
 from PIL import Image, ImageGrab
-from win32.win32gui import GetWindowText, GetForegroundWindow, GetWindowRect
-
+from win32.win32gui import GetWindowText, GetForegroundWindow, GetWindowRect, GetCursorPos, GetCursorInfo
 def GetScreen():
     rect = GetWindowRect(GetForegroundWindow())
-    fish_area = (0, rect[3]/2, rect[2], rect[3]*0.77)
-    #print(fish_area)
+    fish_area = (0, rect[3]/2, rect[2], int(rect[3]*0.778))
+
     img = ImageGrab.grab(fish_area)
     img = np.array(img)
 
